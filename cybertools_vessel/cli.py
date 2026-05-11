@@ -1,6 +1,5 @@
-
 """
-cybtl — CyberTools Vessel v2.0
+cybtl — CyberTools Vessel v2.0.0
 Global CLI for CyberTools API
 
 Usage:
@@ -69,7 +68,7 @@ def mag(t):       return c(t, MAG)
 
 # ── ASCII art header ───────
 
-BANNER = f"""{BCYAN}
+BANNER = f"""{BOLD}{RED}
  ██████╗██╗   ██╗██████╗ ███████╗██████╗ ████████╗ ██████╗  ██████╗ ██╗     ███████╗
 ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██╔════╝
 ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝   ██║   ██║   ██║██║   ██║██║     ███████╗
@@ -82,29 +81,40 @@ BANNER = f"""{BCYAN}
 
 DIVIDER = c("─" * 58, DIM)
 
-MENU_ITEMS = [
-    ("0", RED,  "✗",  "Exit"),
-    ("1", CYAN, "◎",  "Recon                <domain>"),
-    ("2", CYAN, "⟳",  "Analyze URL          <url>"),
-    ("3", CYAN, "◈",  "BB Scan              <url>"),
-    ("4", CYAN, "⊞",  "Expand Subdomains    <domain>"),
-    ("5", CYAN, "⊡",  "Endpoints            <url>"),
-    ("6", CYAN, "⊟",  "Params               <url>"),
-    ("7", YEL,  "⚡", "Full Workflow        <target>"),
-    ("8", YEL,  "🚀", "Express Workflow     <target>"),
-    ("9", YEL,  "◉",  "Bug Bounty Workflow  <target>"),
-    ("10", YEL, "⊹",  "Subdomains Workflow  <domain>"),
-    ("11", YEL, "⊠",  "API Scan Workflow    <url>"),
-    ("12", MAG, "◇",  "Payloads             <xss|sqli|lfi|ssrf|idor|open_redirect>"),
-    ("13", MAG, "⌗",  "Hash                 <algo> <text>"),
-    ("14", MAG, "⊛",  "Encode               <base64|hex|url> <text>"),
-    ("15", MAG, "⊙",  "IP Info              <address|me>"),
-    ("16", MAG, "🔑", "Password Analyze     <password>"),
-    ("17", DIM, "⊚",  "Last Scan"),
-    ("18", DIM, "🗃",  "Cache Status"),
-    ("19", GRN, "⚙",  "Show Config"),
-    ("20", GRN, "✎",  "Set Config           <key> <value>"),
+MENU_SECTIONS = [
+    ("RECON", CYAN, [
+        ("1",  "◎", "Recon",             "<domain>"),
+        ("2",  "⟳", "Analyze URL",       "<url>"),
+        ("3",  "◈", "BB Scan",           "<url>"),
+        ("4",  "⊞", "Expand Subdomains", "<domain>"),
+        ("5",  "⊡", "Endpoints",         "<url>"),
+        ("6",  "⊟", "Params",            "<url>"),
+    ]),
+    ("WORKFLOWS", YEL, [
+        ("7",  "⚡", "Full Workflow",     "<target>"),
+        ("8",  "▶",  "Express Workflow",  "<target>"),
+        ("9",  "◉",  "Bug Bounty",        "<target>"),
+        ("10", "⊹",  "Subdomains",        "<domain>"),
+        ("11", "⊠",  "API Scan",          "<url>"),
+    ]),
+    ("UTILITIES", MAG, [
+        ("12", "◇",  "Payloads",          "<xss|sqli|lfi|ssrf|idor>"),
+        ("13", "⌗",  "Hash",              "<algo> <text>"),
+        ("14", "⊛",  "Encode",            "<base64|hex|url> <text>"),
+        ("15", "⊙",  "IP Info",           "<address|me>"),
+        ("16", "🔑", "Password Analyze",  "<password>"),
+    ]),
+    ("SYSTEM", GRN, [
+        ("17", "⊚",  "Last Scan",         ""),
+        ("18", "▤",  "Cache Status",      ""),
+        ("19", "⚙",  "Show Config",       ""),
+        ("20", "✎",  "Set Config",        "<key> <value>"),
+        ("0",  "✗",  "Exit",              ""),
+    ]),
 ]
+
+# Fixed visible column width (no ANSI codes)
+_COL_W = 36
 
 
 def clear_screen():
@@ -126,20 +136,54 @@ def print_config_box():
     print(DIVIDER)
 
 
+def _render_item(num, icon, label, arg, col):
+    """Returns (plain_text, ansi_text) for one menu item."""
+    arg_s   = f" {arg}" if arg else ""
+    plain   = f"  {num+'.':>3}  {icon} {label}{arg_s}"
+    ansi    = f"  {c(num+'.', col):>3}  {c(icon, col)} {label}{dim(arg_s)}"
+    return plain, ansi
+
+
 def print_menu():
-    print(f"\n  {bold('Available Options:')}\n")
-    left  = MENU_ITEMS[:11]
-    right = MENU_ITEMS[11:]
-    max_left = max(len(n) for n, *_ in left)
-    for i, (left_item, right_item) in enumerate(zip(left, right + [None] * max(0, len(left)-len(right)))):
-        n, col, icon, label = left_item
-        lhs = f"  {c(n+'.', col):>6}  {c(icon, col)} {label}"
-        if right_item:
-            rn, rc, ri, rl = right_item
-            rhs = f"  {c(rn+'.', rc):>7}  {c(ri, rc)} {rl}"
+    def build_lines(sections):
+        lines = []
+        for title, col, items in sections:
+            lines.append(("HDR", title, col))
+            for entry in items:
+                lines.append(("ITEM",) + entry + (col,))
+            lines.append(("GAP",))
+        return lines
+
+    left  = build_lines(MENU_SECTIONS[:2])   # RECON + WORKFLOWS
+    right = build_lines(MENU_SECTIONS[2:])   # UTILITIES + SYSTEM
+    maxl  = max(len(left), len(right))
+    left  += [("GAP",)] * (maxl - len(left))
+    right += [("GAP",)] * (maxl - len(right))
+
+    print()
+    for l, r in zip(left, right):
+        # ── left cell ──────────────────────────────
+        if l[0] == "HDR":
+            lhs_plain = f"  ┄ {l[1]}"
+            lhs_ansi  = f"  {dim('┄')} {c(l[1], l[2]+BOLD)}"
+        elif l[0] == "ITEM":
+            _, num, icon, label, arg, col = l
+            lhs_plain, lhs_ansi = _render_item(num, icon, label, arg, col)
         else:
-            rhs = ""
-        print(f"{lhs:<52}{rhs}")
+            lhs_plain, lhs_ansi = "", ""
+
+        # ── right cell ─────────────────────────────
+        if r[0] == "HDR":
+            rhs_ansi = f"    {dim('┄')} {c(r[1], r[2]+BOLD)}"
+        elif r[0] == "ITEM":
+            _, num, icon, label, arg, col = r
+            _, rhs_ansi = _render_item(num, icon, label, arg, col)
+            rhs_ansi = "    " + rhs_ansi.lstrip()
+        else:
+            rhs_ansi = ""
+
+        pad = max(0, _COL_W - len(lhs_plain))
+        print(f"{lhs_ansi}{' ' * pad}{rhs_ansi}")
     print()
 
 
