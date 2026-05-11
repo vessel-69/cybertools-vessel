@@ -80,13 +80,13 @@ pipx upgrade cybertools-vessel
 ## Install specific version
 
 ```bash
-pip install cybertools-vessel==1.1.0
+pip install cybertools-vessel==1.1.1
 ```
 
 With `pipx`:
 
 ```bash
-pipx install cybertools-vessel==1.1.0
+pipx install cybertools-vessel==1.1.1
 ```
 
 ---
@@ -104,7 +104,7 @@ Specific version:
 
 ```bash
 pip uninstall cybertools-vessel -y
-pip install --no-cache-dir cybertools-vessel==1.1.0
+pip install --no-cache-dir cybertools-vessel==1.1.1
 ```
 
 With `pipx`:
@@ -118,7 +118,7 @@ Specific version with `pipx`:
 
 ```bash
 pipx uninstall cybertools-vessel
-pipx install cybertools-vessel==1.1.0
+pipx install cybertools-vessel==1.1.1
 ```
 
 ---
