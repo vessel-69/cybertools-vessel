@@ -9,14 +9,14 @@
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
 ```
 
-# cybertools-vessel
+# CyberTools-vessel
 
 **Global CLI for CyberTools API · v1.1.1**
 
-[![PyPI](https://img.shields.io/badge/pypi-v1.1.1-e63030?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/cybertools-vessel/)
-[![Python](https://img.shields.io/badge/python-%3E%3D3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/cybertools-vessel/)
+[![PyPI](https://img.shields.io/badge/pypi-v1.1.1-e63030?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/CyberTools-vessel/)
+[![Python](https://img.shields.io/badge/python-%3E%3D3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/CyberTools-vessel/)
 [![License](https://img.shields.io/badge/license-MIT-e63030?style=flat-square)](LICENSE)
-[![AUR](https://img.shields.io/badge/AUR-cybertools--vessel-1793D1?style=flat-square&logo=archlinux&logoColor=white)](https://aur.archlinux.org/packages/cybertools-vessel)
+[![AUR](https://img.shields.io/badge/AUR-CyberTools--vessel-1793D1?style=flat-square&logo=archlinux&logoColor=white)](https://aur.archlinux.org/packages/CyberTools-vessel)
 
 **One install. Almost Every recon tool you need. No dependency jungle.**
 
@@ -37,7 +37,7 @@ Basically: less tab-hopping, more doing.
 ### Using pip
 
 ```bash
-pip install cybertools-vessel
+pip install CyberTools-vessel
 ```
 
 ### Using pipx (Recommended)
@@ -45,7 +45,7 @@ pip install cybertools-vessel
 if you want it installed globally without messing with your Python environment.
 
 ```bash
-pipx install cybertools-vessel
+pipx install CyberTools-vessel
 ```
 
 If you do not have `pipx` yet:
@@ -58,7 +58,7 @@ python3 -m pipx ensurepath
 Then restart your terminal and run:
 
 ```bash
-pipx install cybertools-vessel
+pipx install CyberTools-vessel
 ```
 
 That is it. No dramatic setup ritual required.
@@ -70,13 +70,13 @@ That is it. No dramatic setup ritual required.
 Latest version:
 
 ```bash
-pip install --upgrade cybertools-vessel
+pip install --upgrade CyberTools-vessel
 ```
 
 With `pipx`:
 
 ```bash
-pipx upgrade cybertools-vessel
+pipx upgrade CyberTools-vessel
 ```
 
 ---
@@ -84,13 +84,13 @@ pipx upgrade cybertools-vessel
 ## Install specific version
 
 ```bash
-pip install cybertools-vessel==1.1.1
+pip install CyberTools-vessel==1.1.1
 ```
 
 With `pipx`:
 
 ```bash
-pipx install cybertools-vessel==1.1.1
+pipx install CyberTools-vessel==1.1.1
 ```
 
 ---
@@ -100,29 +100,29 @@ pipx install cybertools-vessel==1.1.1
 Latest version:
 
 ```bash
-pip uninstall cybertools-vessel -y
-pip install --no-cache-dir cybertools-vessel
+pip uninstall CyberTools-vessel -y
+pip install --no-cache-dir CyberTools-vessel
 ```
 
 Specific version:
 
 ```bash
-pip uninstall cybertools-vessel -y
-pip install --no-cache-dir cybertools-vessel==1.1.1
+pip uninstall CyberTools-vessel -y
+pip install --no-cache-dir CyberTools-vessel==1.1.1
 ```
 
 With `pipx`:
 
 ```bash
-pipx uninstall cybertools-vessel
-pipx install cybertools-vessel
+pipx uninstall CyberTools-vessel
+pipx install CyberTools-vessel
 ```
 
 Specific version with `pipx`:
 
 ```bash
-pipx uninstall cybertools-vessel
-pipx install cybertools-vessel==1.1.1
+pipx uninstall CyberTools-vessel
+pipx install CyberTools-vessel==1.1.1
 ```
 
 ---
