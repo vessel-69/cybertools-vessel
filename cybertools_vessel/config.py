@@ -8,7 +8,7 @@ CONFIG_DIR  = Path.home() / ".config" / "cybtl"
 CONFIG_FILE = CONFIG_DIR / "config.json"
 
 DEFAULTS = {
-    "api_url":   "https://cybertools-api.fly.dev",
+    "api_url":   "https://www.cyber-tools.dev",
     "timeout":   60,
     "save_dir":  str(Path.home() / "cybtl-reports"),
 }
