@@ -28,6 +28,10 @@ Basically: less tab-hopping, more doing.
 
 ---
 
+<img width="1115" height="654" alt="Screenshot from 2026-05-12 04-26-03" src="https://github.com/user-attachments/assets/32166eb3-9ff4-4472-9d6b-912a52b018b1" />
+
+---
+
 ## Install
 
 ### Using pip
