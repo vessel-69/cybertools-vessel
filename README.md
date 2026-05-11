@@ -36,9 +36,9 @@ Basically: less tab-hopping, more doing.
 pip install cybertools-vessel
 ```
 
-### Using pipx
+### Using pipx (Recommended)
 
-Recommended if you want it installed globally without messing with your Python environment.
+if you want it installed globally without messing with your Python environment.
 
 ```bash
 pipx install cybertools-vessel
@@ -58,6 +58,68 @@ pipx install cybertools-vessel
 ```
 
 That is it. No dramatic setup ritual required.
+
+---
+
+## Update
+
+Latest version:
+
+```bash
+pip install --upgrade cybertools-vessel
+```
+
+With `pipx`:
+
+```bash
+pipx upgrade cybertools-vessel
+```
+
+---
+
+## Install specific version
+
+```bash
+pip install cybertools-vessel==1.1.0
+```
+
+With `pipx`:
+
+```bash
+pipx install cybertools-vessel==1.1.0
+```
+
+---
+
+## Reinstall / hard reset
+
+Latest version:
+
+```bash
+pip uninstall cybertools-vessel -y
+pip install --no-cache-dir cybertools-vessel
+```
+
+Specific version:
+
+```bash
+pip uninstall cybertools-vessel -y
+pip install --no-cache-dir cybertools-vessel==1.1.0
+```
+
+With `pipx`:
+
+```bash
+pipx uninstall cybertools-vessel
+pipx install cybertools-vessel
+```
+
+Specific version with `pipx`:
+
+```bash
+pipx uninstall cybertools-vessel
+pipx install cybertools-vessel==1.1.0
+```
 
 ---
 
@@ -209,9 +271,7 @@ Tiny chaos, but controlled.
 | ----------- | ------------------------------------------------------------------------------------------------------------ |
 | Website     | [https://www.cyber-tools.dev](https://www.cyber-tools.dev)                                                   |
 | Docs        | [https://www.cyber-tools.dev/docs](https://www.cyber-tools.dev/docs)                                         |
-| PyPI        | [https://pypi.org/project/cybertools-vessel/](https://pypi.org/project/cybertools-vessel/)                   |
 | API repo    | [https://github.com/vessel-69/cybertools-api](https://github.com/vessel-69/cybertools-api)                   |
-| AUR package | [https://aur.archlinux.org/packages/cybertools-vessel](https://aur.archlinux.org/packages/cybertools-vessel) |
 
 ---
 
