@@ -45,8 +45,8 @@ from . import __version__, __url__
 from . import config as cfg
 from . import api
 
-
 # --- Terminal capability detection ---
+
 
 def _get_term_width():
     try:
@@ -74,8 +74,8 @@ MAG = "\033[95m"
 BLU = "\033[94m"
 ORG = "\033[38;5;208m"
 WHT = "\033[97m"
-DGRY = "\033[38;5;240m"
-GRY = "\033[38;5;246m"
+DGRY = "\033[38;5;153m"  # pastel sky-blue — vivid on transparent bg
+GRY = "\033[38;5;195m"  # alice-blue — near-white, always readable
 
 # Background colours
 BG_RED = "\033[41m"
@@ -153,13 +153,13 @@ _ctrl_q_exit = False
 
 def _setup_ctrl_q():
     """Bind Ctrl+Q to exit: disable IXON flow-control, then map via readline."""
-    
+
     try:
         import termios
 
         fd = sys.stdin.fileno()
         attrs = termios.tcgetattr(fd)
-        attrs[0] &= ~termios.IXON 
+        attrs[0] &= ~termios.IXON
         termios.tcsetattr(fd, termios.TCSADRAIN, attrs)
     except Exception:
         pass
@@ -198,8 +198,8 @@ BANNER_FULL = f"""{BOLD}{RED}
 
 BANNER_COMPACT = f"  {BOLD}{RED}[ CYBERTOOLS VESSEL ]{R}"
 
-DIVIDER = c("─" * 58, DGRY)
-DIVIDER_THIN = c("·" * 58, DGRY)
+DIVIDER = c("─" * 58, GRY)
+DIVIDER_THIN = c("·" * 58, GRY)
 
 
 def _banner_line(full: bool = True):
@@ -210,25 +210,27 @@ def _banner_line(full: bool = True):
     ver_str = f"v{__version__}"
     url_str = __url__
     now_str = datetime.datetime.now().strftime("%H:%M:%S")
-    print(
-        f"  {dgry('CyberTools Vessel')}  {c(ver_str, CYAN)}  {dgry('·')}  {dgry(url_str)}  {dgry('·')}  {dgry(now_str)}"
-    )
+    dot = c("·", CYAN)
+    print(f"  {dot}  {c('CyberTools Vessel', WHT)}  {c(ver_str, GRN)}")
+    print(f"  {dot}  {c(url_str, CYAN)}")
+    print(f"  {dot}  {c(now_str, YEL)}")
 
 
 # --- Footer / hotkey bar ---
 
+
 def _print_footer():
     parts = [
-        f"{c('Ctrl+Q', YEL)} {dgry('Quit')}",
-        f"{c('0',     YEL)} {dgry('Exit')}",
-        f"{c('?',     YEL)} {dgry('Help')}",
-        f"{c('↑↓',    YEL)} {dgry('History')}",
+        f"{c('Ctrl+Q', YEL)} {c('Quit', WHT)}",
+        f"{c('0',     YEL)} {c('Exit', WHT)}",
+        f"{c('?',     YEL)} {c('Help', WHT)}",
+        f"{c('↑↓',    YEL)} {c('History', WHT)}",
     ]
-    bar = f"  {dgry('│')}  ".join(parts)
+    bar = f"  {c('│', GRY)}  ".join(parts)
     # session badge
-    sess = f"{dgry('Session:')} {c(_session_info(), GRN)}  {dgry('Cmds:')} {c(str(_session_cmds), GRN)}"
+    sess = f"{c('Session:', WHT)} {c(_session_info(), GRN)}  {c('Cmds:', WHT)} {c(str(_session_cmds), GRN)}"
     w = _get_term_width()
-    sep = c("─" * w, DGRY)
+    sep = c("─" * w, GRY)
     print(sep)
     print(f"  {bar}    {sess}")
     print(sep)
@@ -236,14 +238,16 @@ def _print_footer():
 
 # --- Config box ---
 
+
 def print_config_box():
     conf = cfg.load()
     api_url = conf.get("api_url", "?")
     timeout = conf.get("timeout", 60)
+    dot = c("·", YEL)
     print(DIVIDER)
-    print(
-        f"  {dgry('API')}  {cyan(api_url)}  {dgry('·')}  {dgry('Timeout')}  {cyan(str(timeout)+'s')}  {dgry('·')}  {dgry(str(cfg.CONFIG_FILE))}"
-    )
+    print(f"  {dot}  {c('API', WHT)}  {c(api_url, CYAN)}")
+    print(f"  {dot}  {c('Timeout', WHT)}  {c(str(timeout)+'s', GRN)}")
+    print(f"  {dot}  {c(str(cfg.CONFIG_FILE), GRY)}")
     print(DIVIDER)
 
 
@@ -956,6 +960,7 @@ def cmd_config_set(args):
 
 
 # --- Output helper ---
+
 
 def _handle_output(data: dict, raw: bool, save_path: str):
     if raw:
