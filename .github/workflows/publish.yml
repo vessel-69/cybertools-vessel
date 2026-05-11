@@ -4,25 +4,40 @@ on:
   release:
     types: [published]
 
+# Opt into Node.js 24 now — avoids forced migration on June 2, 2026
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     permissions:
       id-token: write
+      contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
       - name: Install build tools
-        run: pip install --upgrade build setuptools wheel
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade build setuptools wheel
 
       - name: Build distribution
         run: python -m build
+
+      - name: Verify dist contents
+        run: |
+          ls -lh dist/
+          pip install twine
+          twine check dist/*
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
