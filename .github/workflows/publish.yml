@@ -9,7 +9,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.x"
 
       - name: Install build tools
         run: pip install --upgrade build setuptools wheel
