@@ -20,7 +20,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install build tools
-        run: pip install build
+        run: pip install --upgrade build setuptools wheel
 
       - name: Build distribution
         run: python -m build
