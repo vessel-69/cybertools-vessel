@@ -216,7 +216,7 @@ def _banner_line(full: bool = True):
     print(f"  {dot}  {c(now_str, YEL)}")
 
 
-# --- Footer / hotkey bar ---
+# --- hotkey bar ---
 
 
 def _print_footer():

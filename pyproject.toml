@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "CyberTools-vessel"
-version = "1.1.0"
+version = "1.1.1"
 description = "Global CLI for CyberTools API — recon, subdomain enum, payload gen, and more for bug bounty hunters"
 readme = "README.md"
 license = { text = "MIT" }

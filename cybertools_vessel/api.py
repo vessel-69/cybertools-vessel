@@ -52,7 +52,7 @@ def _post(path: str, body: dict) -> dict:
         return {"error": str(e)}
 
 
-# ── Endpoints ─────────────────────────────────────────────────────────────────
+# --- Endpoints ---
 
 def recon(domain: str)     -> dict: return _get(f"/recon?domain={urllib.parse.quote(domain)}")
 def analyze(url: str)      -> dict: return _get(f"/analyze-url?url={urllib.parse.quote(url)}")

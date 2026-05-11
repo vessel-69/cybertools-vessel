@@ -1,5 +1,3 @@
-"""Config management — stores settings in ~/.config/cybtl/config.json"""
-
 import json
 import os
 from pathlib import Path

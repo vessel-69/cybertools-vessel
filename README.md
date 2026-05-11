@@ -11,9 +11,9 @@
 
 # cybertools-vessel
 
-**Global CLI for CyberTools API · v1.1.0**
+**Global CLI for CyberTools API · v1.1.1**
 
-[![PyPI](https://img.shields.io/badge/pypi-v1.1.0-e63030?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/cybertools-vessel/)
+[![PyPI](https://img.shields.io/badge/pypi-v1.1.1-e63030?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/cybertools-vessel/)
 [![Python](https://img.shields.io/badge/python-%3E%3D3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/cybertools-vessel/)
 [![License](https://img.shields.io/badge/license-MIT-e63030?style=flat-square)](LICENSE)
 [![AUR](https://img.shields.io/badge/AUR-cybertools--vessel-1793D1?style=flat-square&logo=archlinux&logoColor=white)](https://aur.archlinux.org/packages/cybertools-vessel)
